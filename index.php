@@ -13,9 +13,13 @@
 
     <!-- create=>insert, read->select update  delete-->
     <div class="card m-4">
+    <h3 class="card-title display-4 text-mt-5 text-center text-success  text-bold text-uppercase">
+           Registration Form
+       </h3>
         <div class="card-body">
             <?php
             include("connection.php");
+             
 
             if (isset($_POST['save'])) { 
                 $Fname =  mysqli_real_escape_string($conn, $_POST['name']);
@@ -104,13 +108,13 @@
                 </thead>
                <tbody>
                    <?php
-                   $result=mysqli_query($conn ,"SELECT *FROM crud ORDER BY ID");
+                   $result=mysqli_query($conn ,"SELECT *FROM crud ORDER BY id");
                    while($row=mysqli_fetch_array($result)){
                        
                     ?>
                     <tr>
                     <td><?php echo $row[0];?></td>
-                    <td><?php echo $row[1];?></td>s
+                    <td><?php echo $row[1];?></td>
                     <td><?php echo $row[2];?></td>
                     <td><?php echo $row[3];?></td>
                     <td><?php echo $row[4];?></td>
@@ -121,8 +125,8 @@
 
                 
                    <td>
-                    <a href='update.php?id=$row[0] &name=$row[1] &phone=$row[2] &email=$row[3] &address=$row[4] &gender=$row[5] &date=$row[6]' class='btn btn-outline-success'> Edit  </a>
-                    <a href='delete.php' class='btn btn-outline-danger'>Delete</a>
+                    <a href='updatee.php?id=$row[0] &name=$row[1] &phone=$row[2] &email=$row[3] &address=$row[4] &gender=$row[5] &date=$row[6]' class='btn btn-outline-success'> Edit  </a>
+                    <a href='delete.php?id=$row[0]'onClick='return deleteRecord()' class='btn btn-outline-danger'>Delete</a>
 
                    </td>";
 
@@ -136,6 +140,11 @@
             </table>
 
         </div>
+        <script>
+            function deleteRecord(){
+                return confirm('Are you sure  You want to delete this record');
+            }
+        </script>
        
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>

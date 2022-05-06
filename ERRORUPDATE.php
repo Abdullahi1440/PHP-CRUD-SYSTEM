@@ -6,8 +6,8 @@ $email=$_GET['email'];
 $address=$_GET['address'];
 $gender=$_GET['gender'];
 $date=$_GET['date'];
-echo $phone;
-//  echo $id ,'<br/>';
+// echo $phone;
+// //  echo $id ,'<br/>';
 //  echo $fullname,'<br/>';
 //  echo $phone ,'<br/>';
 //  echo $email ,'<br/>';
@@ -29,6 +29,9 @@ echo $phone;
 </head>
 <body>
     <div class="card">
+       <h3 class="card-title display-4 text-mt-5 text-center text-success bold text-">
+           Update form 
+       </h3>
         <div class="card-body">
         <form action="" class="m-3" method="post">
                 <div class="row">
@@ -79,13 +82,32 @@ echo $phone;
                 </div>
 
                 <div>
-                    <button type="submit" name="save" class="btn btn-success">Save change</button>
+                    <button type="submit" name="update" class="btn btn-success">Save change</button>
                     <button type="reset" class="btn btn-info">Reset</button>
                 </div>
 
             </form>
         </div>
     </div>
+    <?php
+    include('connection.php');
+    if(isset($_POST['update'])){
+        $fullname=mysqli_real_escape_string($conn,$_POST['name']);
+        $phone=mysqli_real_escape_string($conn,$_POST['phone']);
+        $email=mysqli_real_escape_string($conn,$_POST['email']);
+        $address=mysqli_real_escape_string($conn,$_POST['address']);
+        $gender=mysqli_real_escape_string($conn,$_POST['gender']);
+        $date=mysqli_real_escape_string($conn,$_POST['date']);
+        $updateqry="UPDATE 'crud' SET 'fullname'='".$fullname."','phone'='".$phone."','email'='".$email."','address'='".$address."','gender'='".$gender."',
+                    'created_date'='". $date ."' WHERE 'id'='".$id."'";
+        $resultupdate=mysqli_query($conn,$updateqry);
+        if($resultupdate){
+            echo"<script> alert ('updated successfully')</script>";
+        }else{
+            echo"<script> alert ('Not updated ')</script>";
+        }
+    }
+    ?>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
